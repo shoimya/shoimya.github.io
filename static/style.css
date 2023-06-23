@@ -295,7 +295,7 @@ body{
 }
 #about .col-right p{
     font-size: large;
-    color: aliceblue;
+    color: rgb(0, 0, 0);
     margin-bottom: 20px;
 }
 #about .col-right .cta{
