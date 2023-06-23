@@ -1,1 +1,0 @@
-# shoimya.github.io
