@@ -1,5 +1,17 @@
 [
   {
+    "name": "Initial-R-projects",
+    "description": "I am learning R on my own, I started with using variables, then moved on to writing functions, and am now progressing into data analysis and visualizations.",
+    "link": "https://github.com/shoimya/Initial-R-projects-"
+  },
+  
+  {
+    "name": "Twitter-Sentiment-Classifier",
+    "description": "This repository contains my Machine Learning project for a Twitter Sentiment Classifier. The goal of this project is to practice and explore basic Natural Language Processing (NLP) concepts by analyzing Twitter data and classifying tweets based on sentiment.",
+    "link": "https://github.com/shoimya/Twitter-Sentiment-Classifier"
+  },
+  
+  {
     "name": "Web-Scraper",
     "description": "This app was built to aid my team at Datasoft in gathering real time market information from Dhaka and Chittagong stock exchange.",
     "link": "https://github.com/shoimya/Web-Scraper"
