@@ -1,0 +1,9 @@
+[
+  {
+    "title": "Attention Is All You Need",
+    "authors": "Vaswani et al.",
+    "venue": "NeurIPS 2017",
+    "takeaway": "The paper that replaced recurrence with self-attention. Worth reading closely for how the scaled dot-product and multi-head formulation fall out of very simple linear algebra.",
+    "link": "https://arxiv.org/abs/1706.03762"
+  }
+]

@@ -93,6 +93,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Projects functionality
     initializeProjectsFunctionality();
+
+    // Papers functionality
+    loadPapers();
+
+    // Updates functionality
+    loadUpdates();
     
     // Initialize the page by activating the first navigation link
     navLinks[0].click();
@@ -144,6 +150,96 @@ async function loadLinkedInPosts() {
         // Fallback: show a message that posts couldn't be loaded
         const blogPostsContainer = document.getElementById('blog-posts');
         blogPostsContainer.innerHTML = '<p>LinkedIn posts are being loaded. Please refresh the page if this persists.</p>';
+    }
+}
+
+// Updates functionality
+async function loadUpdates() {
+    const updatesList = document.getElementById('updates-list');
+
+    try {
+        const response = await fetch('./assets/updates.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const updates = await response.json();
+
+        updates.forEach(update => {
+            const updateElement = document.createElement('div');
+            updateElement.className = 'update-item';
+
+            // Date and link are both optional
+            const dateMarkup = update.date && update.date.trim() !== ''
+                ? `<span class="update-date">${update.date}</span>`
+                : '';
+            const linkMarkup = update.link && update.link.trim() !== ''
+                ? ` <a href="${update.link}" target="_blank" rel="noopener" class="update-link">${update.linkText && update.linkText.trim() !== '' ? update.linkText : 'Read more'}</a>`
+                : '';
+
+            updateElement.innerHTML = `
+                <div class="update-header">
+                    <h4 class="update-title">${update.title}</h4>
+                    ${dateMarkup}
+                </div>
+                <p class="update-description">${update.description}${linkMarkup}</p>
+            `;
+
+            updatesList.appendChild(updateElement);
+        });
+        console.log(`Loaded ${updates.length} updates successfully`);
+    } catch (error) {
+        console.error('Error loading updates:', error);
+        updatesList.innerHTML = '<p>Updates are being loaded. Please refresh the page if this persists.</p>';
+    }
+}
+
+// Papers functionality
+async function loadPapers() {
+    const papersList = document.getElementById('papers-list');
+
+    try {
+        const response = await fetch('./assets/papers.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const papers = await response.json();
+
+        papers.forEach(paper => {
+            const paperElement = document.createElement('article');
+            paperElement.className = 'paper-item';
+
+            // Authors and venue are optional; only render the line if we have one of them
+            const metaParts = [paper.authors, paper.venue].filter(part => part && part.trim() !== '');
+            const metaMarkup = metaParts.length
+                ? `<div class="paper-meta">${metaParts.map(part => `<span>${part}</span>`).join('')}</div>`
+                : '';
+            const takeawayMarkup = paper.takeaway && paper.takeaway.trim() !== ''
+                ? `<p class="paper-takeaway">${paper.takeaway}</p>`
+                : '';
+            const linkMarkup = paper.link && paper.link.trim() !== ''
+                ? `<a href="${paper.link}" target="_blank" rel="noopener" class="paper-link">
+                       Read the paper <i class="fas fa-arrow-up-right-from-square"></i>
+                   </a>`
+                : '';
+
+            paperElement.innerHTML = `
+                <div class="paper-icon">
+                    <i class="fas fa-file-lines"></i>
+                </div>
+                <div class="paper-info">
+                    <h3>${paper.title}</h3>
+                    ${metaMarkup}
+                    ${takeawayMarkup}
+                    ${linkMarkup}
+                </div>
+            `;
+
+            papersList.appendChild(paperElement);
+        });
+        console.log(`Loaded ${papers.length} papers successfully`);
+    } catch (error) {
+        console.error('Error loading papers:', error);
+        papersList.innerHTML = '<p>Papers are being loaded. Please refresh the page if this persists.</p>';
     }
 }
 
