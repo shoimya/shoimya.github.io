@@ -8,10 +8,26 @@
   },
 
   {
+    "title": "Corrective Retrieval Augmented Generation",
+    "authors": "Yan, Gu, Zhu, Ling",
+    "venue": "arXiv, 2024",
+    "takeaway": "CRAG adds a lightweight retrieval evaluator that grades retrieved documents and triggers a different action depending on the verdict, falling back to web search when the retrieval looks wrong. The decompose-then-recompose step for stripping irrelevant passages is the part worth borrowing.",
+    "link": "https://arxiv.org/abs/2401.15884"
+  },
+
+  {
     "title": "Attention Is All You Need",
     "authors": "Vaswani et al.",
     "venue": "NeurIPS 2017",
     "takeaway": "The paper that replaced recurrence with self-attention. Worth reading closely for how the scaled dot-product and multi-head formulation fall out of very simple linear algebra.",
     "link": "https://arxiv.org/abs/1706.03762"
+  },
+
+  {
+    "title": "A Neural Probabilistic Language Model",
+    "authors": "Bengio, Ducharme, Vincent, Jauvin",
+    "venue": "JMLR 3:1137-1155, 2003",
+    "takeaway": "The paper that introduced learned word embeddings, tackling the curse of dimensionality by having a neural net learn a distributed representation for words alongside the probability function. Every modern embedding traces back to this.",
+    "link": "https://www.jmlr.org/papers/v3/bengio03a.html"
   }
 ]
