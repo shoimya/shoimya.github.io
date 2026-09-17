@@ -1,5 +1,13 @@
 [
   {
+    "title": "AgentRewardBench: Evaluating Automatic Evaluations of Web Agent Trajectories",
+    "authors": "Lù, Kazemnejad, Meade, Patel et al.",
+    "venue": "arXiv, 2025",
+    "takeaway": "Benchmarks how well LLM judges assess web agent trajectories, across 1302 expert-annotated trajectories from 5 benchmarks and 4 LLMs. Two findings stand out: no single judge wins across all benchmarks, and rule-based evaluation systematically underreports agent success.",
+    "link": "https://arxiv.org/abs/2504.08942"
+  },
+
+  {
     "title": "Attention Is All You Need",
     "authors": "Vaswani et al.",
     "venue": "NeurIPS 2017",
