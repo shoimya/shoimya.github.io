@@ -16,11 +16,35 @@
   },
 
   {
+    "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+    "authors": "Asai, Wu, Wang, Sil, Hajishirzi",
+    "venue": "ICLR 2024",
+    "takeaway": "Trains a single model to decide when to retrieve and to critique its own output using reflection tokens, rather than retrieving on every query. Reads naturally alongside CRAG as the other answer to the same question: what to do when retrieval is the weak link.",
+    "link": "https://arxiv.org/abs/2310.11511"
+  },
+
+  {
+    "title": "Scalable AI Safety via Doubly-Efficient Debate",
+    "authors": "Brown-Cohen, Irving, Piliouras",
+    "venue": "arXiv, 2023",
+    "takeaway": "Extends debate-based oversight to stochastic AI systems, with protocols where an honest debater wins using only polynomially many simulation steps even against a dishonest one allowed exponentially many. A complexity-theoretic take on scalable oversight rather than an empirical one.",
+    "link": "https://arxiv.org/abs/2311.14125"
+  },
+
+  {
     "title": "Attention Is All You Need",
     "authors": "Vaswani et al.",
     "venue": "NeurIPS 2017",
     "takeaway": "The paper that replaced recurrence with self-attention. Worth reading closely for how the scaled dot-product and multi-head formulation fall out of very simple linear algebra.",
     "link": "https://arxiv.org/abs/1706.03762"
+  },
+
+  {
+    "title": "On the Difficulty of Training Recurrent Neural Networks",
+    "authors": "Pascanu, Mikolov, Bengio",
+    "venue": "ICML 2013",
+    "takeaway": "Diagnoses vanishing and exploding gradients from analytical, geometric, and dynamical-systems angles, then proposes gradient norm clipping. Clipping is still standard practice in every training loop I write, which makes the original argument worth reading rather than inheriting.",
+    "link": "https://arxiv.org/abs/1211.5063"
   },
 
   {
