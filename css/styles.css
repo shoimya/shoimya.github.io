@@ -1,27 +1,46 @@
 /* Base Styles and Variables */
+/*
+ * Palette: Sanzo Wada, A Dictionary of Color Combinations, combination #325
+ *   Naples Yellow     #fbe6a0
+ *   Deep Slate Green  #112f2c
+ *   Eugenia Red       #da525d  (light accent)
+ *   Yellow Ocher       #e2b540  (dark accent)
+ * Every secondary shade below is derived from those four via color-mix().
+ */
 :root {
     /* Light Theme Variables */
-    --light-bg: #ffffff;
-    --light-text: #000000;
-    --light-secondary: #333333;
-    --light-accent: #000000;
-    --light-accent-hover: #333333;
-    --light-card-bg: #f8f8f8;
-    --light-card-border: #e0e0e0;
-    
+    --light-bg: #fbe6a0;
+    --light-text: #112f2c;
+    --light-secondary: color-mix(in srgb, #112f2c 72%, #fbe6a0);
+    --light-accent: #da525d;
+    --light-accent-hover: color-mix(in srgb, #da525d 72%, #112f2c);
+    /* Eugenia Red is only 3.17:1 on Naples Yellow, so filled buttons use a
+       deepened mix that carries Naples Yellow text at 4.53:1 */
+    --light-accent-surface: color-mix(in srgb, #da525d 75%, #112f2c);
+    --light-on-accent: #fbe6a0;
+    --light-link: #112f2c;
+    --light-card-bg: color-mix(in srgb, #fbe6a0 90%, #112f2c);
+    --light-card-border: color-mix(in srgb, #112f2c 22%, #fbe6a0);
+    --light-shadow: rgba(17, 47, 44, 0.18);
+
     /* Dark Theme Variables */
-    --dark-bg: #000000;
-    --dark-text: #ffffff;
-    --dark-secondary: #cccccc;
-    --dark-accent: #ffffff;
-    --dark-accent-hover: #cccccc;
-    --dark-card-bg: #111111;
-    --dark-card-border: #333333;
-    
+    --dark-bg: #112f2c;
+    --dark-text: #fbe6a0;
+    --dark-secondary: color-mix(in srgb, #fbe6a0 76%, #112f2c);
+    --dark-accent: #e2b540;
+    --dark-accent-hover: color-mix(in srgb, #e2b540 78%, #fbe6a0);
+    /* Yellow Ocher clears 7.44:1 on Deep Slate Green, so it needs no deepening */
+    --dark-accent-surface: #e2b540;
+    --dark-on-accent: #112f2c;
+    --dark-link: #e2b540;
+    --dark-card-bg: color-mix(in srgb, #112f2c 92%, #fbe6a0);
+    --dark-card-border: color-mix(in srgb, #fbe6a0 24%, #112f2c);
+    --dark-shadow: rgba(17, 47, 44, 0.55);
+
     /* Common Variables */
     --transition-speed: 0.3s;
     --border-radius: 8px;
-    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --box-shadow: 0 4px 6px var(--shadow-color);
 }
 
 /* Apply Theme Based on Class */
@@ -31,8 +50,12 @@ body.light-mode {
     --secondary-text: var(--light-secondary);
     --accent-color: var(--light-accent);
     --accent-hover: var(--light-accent-hover);
+    --accent-surface: var(--light-accent-surface);
+    --on-accent: var(--light-on-accent);
+    --link-color: var(--light-link);
     --card-bg: var(--light-card-bg);
     --card-border: var(--light-card-border);
+    --shadow-color: var(--light-shadow);
 }
 
 body.dark-mode {
@@ -41,8 +64,12 @@ body.dark-mode {
     --secondary-text: var(--dark-secondary);
     --accent-color: var(--dark-accent);
     --accent-hover: var(--dark-accent-hover);
+    --accent-surface: var(--dark-accent-surface);
+    --on-accent: var(--dark-on-accent);
+    --link-color: var(--dark-link);
     --card-bg: var(--dark-card-bg);
     --card-border: var(--dark-card-border);
+    --shadow-color: var(--dark-shadow);
 }
 
 /* Reset and Base Styles */
@@ -73,12 +100,19 @@ body {
 
 a {
     text-decoration: none;
-    color: var(--accent-color);
+    color: var(--link-color);
     transition: color var(--transition-speed);
 }
 
 a:hover {
     color: var(--accent-hover);
+}
+
+/* Keyboard focus: accent ring, offset so it reads against card and page alike */
+:focus-visible {
+    outline: 3px solid var(--accent-surface);
+    outline-offset: 2px;
+    border-radius: 2px;
 }
 
 ul {
@@ -93,7 +127,7 @@ img {
 /* Header and Navigation */
 header {
     background-color: var(--bg-color);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px var(--shadow-color);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -242,7 +276,7 @@ body.dark-mode .theme-toggle-icon .sun {
     height: auto;
     border-radius: 10px;
     object-fit: cover;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px var(--shadow-color);
 }
 
 .about-text {
@@ -398,10 +432,16 @@ body.dark-mode .theme-toggle-icon .sun {
 .update-link {
     font-weight: 700;
     white-space: nowrap;
+    color: var(--link-color);
+    text-decoration: underline;
+    text-decoration-color: var(--accent-color);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
 }
 
 .update-link:hover {
-    text-decoration: underline;
+    color: var(--accent-hover);
+    text-decoration-color: var(--accent-hover);
 }
 
 /* Projects Section */
@@ -427,7 +467,7 @@ body.dark-mode .theme-toggle-icon .sun {
 
 .project-item:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px var(--shadow-color);
 }
 
 .project-item[data-link=""]:hover {
@@ -498,7 +538,7 @@ body.dark-mode .theme-toggle-icon .sun {
 
 .paper-item:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px var(--shadow-color);
 }
 
 .paper-icon {
@@ -552,7 +592,18 @@ body.dark-mode .theme-toggle-icon .sun {
     gap: 8px;
     font-size: 0.9rem;
     font-weight: 700;
-    color: var(--accent-color);
+    /* Small text, so it takes the text color and lets the accent carry the
+       underline — the accent itself is too low-contrast at this size in light mode */
+    color: var(--link-color);
+    text-decoration: underline;
+    text-decoration-color: var(--accent-color);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+.paper-link:hover {
+    color: var(--accent-hover);
+    text-decoration-color: var(--accent-hover);
 }
 
 .paper-link i {
@@ -660,14 +711,14 @@ body.dark-mode .theme-toggle-icon .sun {
 }
 
 .edit-post-btn:hover {
-    background-color: var(--accent-color);
-    color: var(--bg-color);
+    background-color: var(--accent-surface);
+    color: var(--on-accent);
 }
 
 .delete-post-btn:hover {
-    background-color: #dc3545;
-    color: white;
-    border-color: #dc3545;
+    background-color: var(--accent-surface);
+    color: var(--on-accent);
+    border-color: var(--accent-surface);
 }
 
 /* LinkedIn post styles */
@@ -737,8 +788,9 @@ body.dark-mode .theme-toggle-icon .sun {
 }
 
 .contact-button:hover {
-    background-color: var(--accent-color);
-    color: var(--bg-color);
+    background-color: var(--accent-surface);
+    color: var(--on-accent);
+    border-color: var(--accent-surface);
 }
 
 .contact-button i {
@@ -767,7 +819,7 @@ footer {
         transition: left var(--transition-speed);
         background-color: var(--bg-color);
         padding: 20px 0;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 5px 10px var(--shadow-color);
         gap: 15px;
     }
 
